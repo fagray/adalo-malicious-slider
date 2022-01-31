@@ -41,7 +41,8 @@ class RangeSlider extends Component {
     
     document.addEventListener("keyup", function(e){
 
-      if (e.key === "Shift") {
+      if (e.key === "Shift" || e.key === "Backspace" || e.key === "F1" || e.key === "F2" || e.key === "F3" || e.key === "F4" || e.key === "F5"
+      || e.key === "F6" || e.key === "F7" || e.key === "F8" || e.key === "F9" || e.key === "F10" || e.key === "F11" || e.key === "F12" || e.key === "Esc" || e.key === "CapsLock") {
         return false
       }
       
